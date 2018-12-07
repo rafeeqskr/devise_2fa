@@ -25,10 +25,10 @@
     <%= form.label :contact %>
     <%= form.text_field :contact %>
   </div>
-
-  <div class="field">
-    <%= select_tag "role_ids", options_from_collection_for_select(Role.all, "id", "name", user.roles.map(&:id)), multiple: true %>
-  </div>
+  <% Role.all.each do |role| %>
+    <label>
+    <%= check_box_tag 'role_ids][]',  role.id, user.roles.include?(role) %> <%= role.name %></label> <br />
+  <% end %>
 
   <div class="actions">
     <%= form.submit %>

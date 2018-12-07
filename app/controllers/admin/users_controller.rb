@@ -29,6 +29,7 @@ class Admin::UsersController < AdminController
     respond_to do |format|
       @user.password = Devise.friendly_token.first(8)
       if @user.save
+        params[:role_ids] = [] if params[:role_ids].nil?
         @roles = Role.find(params[:role_ids])
         @user.update_roles(@roles)
         format.html { redirect_to admin_user_url(@user), notice: 'User was successfully created.' }
@@ -45,6 +46,7 @@ class Admin::UsersController < AdminController
   def update
     respond_to do |format|
       if @user.update(user_params)
+        params[:role_ids] = [] if params[:role_ids].nil?
         @roles = Role.find(params[:role_ids])
         @user.update_roles(@roles)
         format.html { redirect_to admin_user_url(@user), notice: 'User was successfully updated.' }
