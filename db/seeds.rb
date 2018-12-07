@@ -7,6 +7,6 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-Role::AllRoles.each do |role_name|
- Role.create(name: role_name)
+Role::DEFAULT_ROLES.each do |role_name|
+ Role.where(name: role_name).first_or_create
 end

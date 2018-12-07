@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_many :user_roles
   has_many :roles, through: :user_roles
 
-  Role::AllRoles.each do |role_name|
+  Role::DEFAULT_ROLES.each do |role_name|
   	define_method("is_#{role_name}?") do
   		roles.exists?(name: role_name)
   	end
