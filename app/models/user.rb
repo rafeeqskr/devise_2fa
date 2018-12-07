@@ -13,4 +13,13 @@ class User < ApplicationRecord
   	end
   end
 
+  def update_roles(new_roles)
+  	[new_roles - self.roles].each do |role|
+  		self.roles << role
+  	end
+  	[self.roles - new_roles].each do |role|
+  		self.roles.destroy(role)
+  	end
+  end
+
 end
