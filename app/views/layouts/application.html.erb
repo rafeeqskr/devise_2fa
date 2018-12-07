@@ -10,10 +10,11 @@
 </head>
 
 <body>
-
-  <li>
-    <%= link_to('users', admin_users_path) %>        
-  </li>
+  <% if current_user.is_admin? %>
+    <li>
+      <%= link_to('users', admin_users_path) %>        
+    </li>
+  <% end %>
   <li>
     <%= link_to('Logout', destroy_user_session_path, method: :delete) %>         
   </li>
